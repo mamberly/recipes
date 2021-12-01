@@ -144,7 +144,7 @@ img {
 }
 
 .review {
-  border: 3px solid black;
+  border: 3px solid #6897bb;
   margin: 10px;
   display: flex;
   justify-content: center

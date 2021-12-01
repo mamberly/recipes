@@ -5,6 +5,9 @@
       <router-link to="/add">Add</router-link>
     </div>
     <router-view/>
+    <div id = "footer">
+    <a href = "https://github.com/mamberly/recipes">Github Link</a>
+    </div>
   </div>
 </template>
 
@@ -17,6 +20,15 @@
   color: #2c3e50;
 }
 
+#footer a {
+  text-decoration: none;
+  font-size: 30px;
+}
+
+#footer {
+margin: 30px;
+background-color: #6897bb;
+}
 #nav {
   padding: 30px;
 }
