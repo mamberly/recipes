@@ -24,7 +24,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/recipes', {
 });
 
 const recipeSchema = new mongoose.Schema({
-  id: String,
   rating: Number,
   title: String,
   description: String,
@@ -36,7 +35,7 @@ const recipeSchema = new mongoose.Schema({
 });
 
 // Create a model for recipes in the museum.
-const Recipe = mongoose.model('recipe', recipeSchema);
+const Recipe = mongoose.model('Recipe', recipeSchema);
 
 // Get a list of all of the recipes in the museum.
 app.get('/api/recipes', async (req, res) => {
@@ -63,7 +62,7 @@ app.get('/api/recipes', async (req, res) => {
 app.get('/api/recipes/:id', async (req, res) => {
   try {
     let recipe = await Recipe.findOne({
-      id: req.params.id,
+      _id: req.params.id,
     });
     res.send(recipe);
   } catch (error) {
@@ -80,14 +79,13 @@ app.post('/api/photos', upload.single('photo'), async (req, res) => {
     return res.sendStatus(400);
   }
   res.send({
-    path: "/images/" + req.file.filetitle
+    path: "/images/" + req.file.filename
   });
 });
 
 // Create a new recipe
 app.post('/api/recipes', async (req, res) => {
   const recipe = new Recipe({
-    id: req.body.id,
     title: req.body.title,
     description: req.body.description,
     path: req.body.path,
@@ -109,7 +107,7 @@ app.post('/api/recipes', async (req, res) => {
 app.post('/api/recipes/:id/review', async (req, res) => {
   try {
     let recipe = await Recipe.findOne({
-      id: req.params.id,
+      _id: req.params.id,
     });
     recipe.reviews.push({
       'review': req.body.review,
@@ -128,7 +126,7 @@ app.post('/api/recipes/:id/review', async (req, res) => {
 app.delete('/api/recipes/:id', async (req, res) => {
   try {
     await Recipe.deleteOne({
-      id: req.params.id
+      _id: req.params.id
     });
     res.sendStatus(200);
   } catch (error) {
@@ -140,7 +138,7 @@ app.delete('/api/recipes/:id', async (req, res) => {
 app.put('/api/recipes/:id', async (req, res) => {
   try {
     let recipe = await Recipe.findOne({
-      id: req.params.id,
+      _id: req.params.id,
     });
     recipe.title =  req.body.title;
     recipe.description = req.body.description;

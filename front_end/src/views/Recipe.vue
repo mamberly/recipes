@@ -18,23 +18,26 @@
     </div>
     <div v-else class="display">
       <h1>{{recipe.title}}</h1>
-      <star-rating v-model="recipe.rating" increment=.5 class="rating"></star-rating>
+      <star-rating class = "recipeRating" v-bind:increment="0.5" v-bind:max-rating="5" v-model="recipe.rating" inactive-color="#c0c0c0" active-color="#6897bb" show-rating="false" v-bind:star-size="30">
+      </star-rating>
       <img :src="recipe.path" />
       <h3>{{recipe.description}}</h3>
-      <p>{{recipe.ingredients}}</p>
+      <p class="ingredients">{{recipe.ingredients}}</p>
       <p>{{recipe.instructions}}</p>
-
+      <hr />
       <div class="reviews">
         <h2>Reviews</h2>
         <p>Write a review!</p>
         <div class="write">
-          <star-rating v-model="curRating" increment=.5 class="rating"></star-rating>
-          <textarea v-model="review" rows=3 cols=50></textarea>
-          <button @click=submitReview>Submit</button>
+          <star-rating v-bind:increment="0.5" v-bind:max-rating="5" v-model="curRating" inactive-color="#c0c0c0" active-color="white" v-bind:star-size="30" class="element">
+          </star-rating>
+          <textarea v-model="review" rows=3 cols=50 class="element"></textarea>
+          <button class="element" @click=submitReview>Submit</button>
         </div>
         <div class="review" v-for="(review, index) in recipe.reviews" :key="index">
-          <star-rating read-only="true" increment=.5 v-model="review.rating" class="rating"></star-rating>
-          {{review.review}}
+          <star-rating v-bind:increment="0.5" v-bind:max-rating="5" v-model="review.rating" read-only="true" inactive-color="#c0c0c0" active-color="#6897bb" show-rating="false" class="reviewItem" v-bind:star-size="20">
+          </star-rating>
+          <p class="reviewItem">{{review.review}}</p>
         </div>
       </div>
     </div>
@@ -83,7 +86,7 @@ export default {
     },
     async upload() {
       try {
-        await axios.put('/api/recipes/' + this.recipe.id, {
+        await axios.put('/api/recipes/' + this.recipe._id, {
           title: this.recipe.title,
           description: this.recipe.description,
           instructions: this.recipe.instructions,
@@ -112,7 +115,38 @@ export default {
 </script>
 
 <style scoped>
-.image {
-  width: 30%;
+img {
+  height: 300px;
+}
+
+.recipeRating {
+  justify-content: center;
+  padding: 5px;
+}
+.write {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  background-color: #6897bb;
+}
+
+.element {
+  margin: 15px;
+}
+
+.rating {
+  justify: center;
+  justify-content: center
+}
+
+.reviewItem {
+  margin: 10px;
+}
+
+.review {
+  border: 3px solid black;
+  margin: 10px;
+  display: flex;
+  justify-content: center
 }
 </style>

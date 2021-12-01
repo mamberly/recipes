@@ -1,13 +1,13 @@
 <template>
 <div class="home">
   <section class="image-gallery">
-    <div class="image" v-for="recipe in recipes" :key="recipe.id">
-      <router-link :to="{ name: 'recipe', params: { id: recipe.id}}">
+    <div class="image" v-for="recipe in recipes" :key="recipe._id">
+      <router-link :to="{ name: 'recipe', params: { id: recipe._id}}">
         <h2>{{recipe.title}}</h2>
         <img :src="recipe.path" />
         <p>{{recipe.description}}</p>
       </router-link>
-      <button @click=deleteRecipe(recipe.id)>Delete</button>
+      <button @click=deleteRecipe(recipe._id)>Delete</button>
     </div>
   </section>
 </div>

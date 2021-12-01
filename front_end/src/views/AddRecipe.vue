@@ -2,7 +2,7 @@
 <div class="add">
   <h1>Add a Recipe</h1>
   <div class="form">
-    <input type="text" v-model="title" placeholder="Name" size =50>
+    <input type="text" v-model="title" placeholder="Name" size=50>
     <p></p>
     <textarea placeholder="Description" v-model="description" rows=3 cols=50></textarea>
     <p></p>
@@ -41,21 +41,18 @@ export default {
         const formData = new FormData();
         formData.append('photo', this.file, this.file.name)
         let r1 = await axios.post('/api/photos', formData);
+        console.log(r1);
         await axios.post('/api/recipes', {
-          id: crypto.randomUUID(),
           title: this.title,
           description: this.description,
           path: r1.data.path,
           instructions: this.instructions,
-          ingredients: this.ingredients,
+          ingredients: this.ingredients
         });
-
         this.title = "";
         this.description = "";
-        this.file = null;
         this.instructions = "";
         this.ingredients = "";
-        this.file=null;
       } catch (error) {
         console.log(error);
       }
