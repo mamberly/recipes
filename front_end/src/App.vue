@@ -2,8 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/manager">Manage Recipes</router-link> |
-      <router-link to="/review">Review</router-link>
+      <router-link to="/add">Add</router-link>
     </div>
     <router-view/>
   </div>
@@ -25,6 +24,7 @@
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  font-size: 20px;
 }
 
 #nav a.router-link-exact-active {

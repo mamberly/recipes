@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import RecipeManager from '../views/RecipeManager.vue'
-import Reviews from '../views/Reviews.vue'
+import AddRecipe from '../views/AddRecipe.vue'
+import Recipe from '../views/Recipe.vue'
 
 Vue.use(VueRouter)
 
@@ -13,14 +13,14 @@ const routes = [
     component: Home
   },
   {
-    path: '/manager',
-    name: 'Reciepe Manager',
-    component: RecipeManager
+    path: '/add',
+    name: 'Add',
+    component: AddRecipe
   },
   {
-    path: '/review',
-    name: 'Review',
-    component: Reviews
+    path: '/recipes/:id',
+    name: 'recipe',
+    component: Recipe,
   }
 
 ]
